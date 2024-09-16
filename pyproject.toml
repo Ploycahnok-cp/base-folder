@@ -1,0 +1,34 @@
+[project]
+name = "base-folder"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Ploycahnok-cp", email = "168716196+Ploycahnok-cp@users.noreply.github.com"},
+]
+dependencies = [
+    "pydantic>=2.9.1",
+    "alembic>=1.13.2",
+    "pytest>=8.3.3",
+    "httpx>=0.27.2",
+    "fastapi>=0.114.2",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.pdm]
+distribution = true
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.pdm.scripts]
+start = 'uvicorn app.main:app --host 0.0.0.0 --reload --workers 4 --timeout-keep-alive 120'
+stop = 'kill -9 $(lsof -i:8000)'
+test-unit = 'pytest -vs --tb=short tests/unit'
+test-integration = 'pytest -vs --tb=short tests/integration'
