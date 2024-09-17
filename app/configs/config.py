@@ -1,5 +1,4 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import Optional
 
 
 class Settings(BaseSettings):
@@ -8,3 +7,7 @@ class Settings(BaseSettings):
     DB_URL: str
 
     model_config = SettingsConfigDict(env_file=".env")
+
+
+async def get_settings() -> Settings:
+    return Settings()

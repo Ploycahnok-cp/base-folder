@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from fastapi.routing import APIRouter
 import importlib
 import os
+
 
 app = FastAPI()
 
@@ -17,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# dynamic routes
+# dynamic routes: all files in app/routes
 route_files = [file for file in os.listdir("app/routes") if file.endswith(".py")]
 for file in route_files:
     module_name = f"app.routes.{file[:-3]}"
